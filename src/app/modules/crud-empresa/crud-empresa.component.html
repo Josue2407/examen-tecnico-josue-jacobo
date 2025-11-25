@@ -1,0 +1,66 @@
+<h1 class="ml-10 mt-10 text-blue-500 text-4xl font-extrabold">Empresas</h1>
+
+        <div class="flex justify-end gap-2">
+            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none" (click)="crear()">
+                Agregar
+            </button>
+        </div>
+
+<div class="flex flex-row justify-center mt-10">
+    <div class="w-4/5 overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        ID
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Nombre
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        NIT
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha Fundación
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Dirección
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (empresa of empresasArray; track $index) {
+                <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{empresa.id}}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{empresa.nombre}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{empresa.nit}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{empresa.fechaFundacion | date:'dd/MM/YYYY'}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{empresa.direccion}}
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <div class="flex flex-row gap-3">
+                            <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer"
+                                (click)="modificar(empresa)">Modificar</a>
+                            <a 
+                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" (click)="delete(empresa.id)">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-modal-empresa [visible]="mostrarModal" [title]="tituloModal" [data]="dataEditar" (closed)="closeModal()"></app-modal-empresa>
